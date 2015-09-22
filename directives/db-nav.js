@@ -1,18 +1,23 @@
+
+
 (function () {
   "use strict";
 
   class DbNavController{
-    constructor(dbconnections){
+    constructor(scope,dbconnections){
       this.dbconnections = dbconnections;
+      this.scope = scope;
       this.isAddingConnection = !dbconnections.hasConnections();
       this.newConnection = {
-        serverAndPort:"ch-mongo01-d:30128"
+        serverAndPort:"localhost:27017"
       }
     }
 
     connect(){
       this.dbconnections.connect(this.newConnection).then(db =>{
         console.dir(db)
+        this.scope.$apply();
+
       },err =>{
         console.dir(err)
       })
@@ -22,8 +27,8 @@
   }
 
   angular.module("mongoman")
-    .controller("dbNavController",["dbconnections",function(dbc){
-      return new DbNavController(dbc);
+    .controller("dbNavController",["$scope", "dbconnections",function(scope,dbc){
+      return new DbNavController(scope,dbc);
     }])
   .directive("dbNav", function(){
     return {

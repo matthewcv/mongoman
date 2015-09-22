@@ -11,9 +11,10 @@
     }
 
     connect(conInfo ){
-      var c = new DbConnection(conInfo);
-      return c.connect().then(db => {
-        return db;
+      var con = new DbConnection(conInfo);
+      return con.connect().then(c => {
+        this.connections.push(c);
+        return c;
       }, err => {
         return err;
       });
@@ -28,7 +29,13 @@
     }
 
     connect(){
-      return this.client.connect("mongodb://"+ this.serverAndPort);
+      return this.client.connect("mongodb://"+ this.serverAndPort).then((db) =>{
+        this.db = db;
+        return this;
+      },
+      (err) =>{
+        return err;
+      });
     }
   }
 

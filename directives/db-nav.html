@@ -7,4 +7,7 @@
       <div><a href="#" ng-click="dbNav.connect()">connect</a></div>
 
   </div>
+  <div ng-repeat="con in dbNav.dbconnections.connections">
+    <div>{{con.serverAndPort}}</div>
+  </div>
 </div>
