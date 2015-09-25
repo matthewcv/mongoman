@@ -1,13 +1,19 @@
-<div>
-
-
 
   <div class="" ng-if="dbNav.isAddingConnection">
       <div>server:port <input ng-model="dbNav.newConnection.serverAndPort" /></div>
       <div><a href="#" ng-click="dbNav.connect()">connect</a></div>
+  </div>
 
-  </div>
-  <div ng-repeat="con in dbNav.dbconnections.connections">
-    <div>{{con.serverAndPort}}</div>
-  </div>
-</div>
+<ul>
+    <li nav-item-cmd="con" class="connection" ng-repeat="con in dbNav.connectionManager.connections">
+    {{con.serverAndPort}}
+    <ul>
+      <li nav-item-cmd="db" class="database" ng-repeat="db in con.databases">{{db.name}}
+        <ul ng-if="db.collections.length">
+          <li nav-item-cmd="col"  ng-repeat="col in db.collections">{{col.name}}</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
