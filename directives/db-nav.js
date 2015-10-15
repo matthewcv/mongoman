@@ -27,12 +27,28 @@
 
   }
   
-  function showToggler(elem){
+  var currentLi = null; //this is the li item in the nav that the mouse is hovering over
+  var actionBox = null; //this is the little box that shows up when you hover over currentLi
+  function showActions(elem){
+    
     if(elem instanceof HTMLLIElement){
+      console.dir(elem);
+      if(actionBox == null){
+        actionBox = document.getElementById("itemActions")
+      }
+      actionBox.style.display = 'block';
+      currentLi = elem;
+      currentLi.appendChild(actionBox)
       var ul = elem.querySelector('ul');
       if(ul){
         
       }
+    }
+  }
+  
+  function hideActions(){
+    if(actionBox){
+      actionBox.style.display = 'none';
     }
   }
 
@@ -48,11 +64,11 @@
       link:function(scope, elem, attrs, ctrl){
         elem.on("mouseover", function(ev){
           
-          showToggler(ev.target);
+          showActions(ev.target);
           
         })        
         elem.on("mouseout", function(ev){
-          
+          hideActions();
           
         })
       }

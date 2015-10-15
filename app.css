@@ -28,4 +28,23 @@ db-nav ul {
 
 db-nav li{
   padding: 0 0 0 1em;
+  position: relative;
+}
+
+
+
+#itemActions{
+  background-color: lightgray;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+    top: 0;
+  left: 0;
+  pointer-events: none;
+  display: none;
+}
+
+#itemActions .collapse{
+  color: black
 }
